@@ -63,21 +63,28 @@ Passerelle par défaut IPv4 :	10.33.19.254
 
 2. Modifications des informations
 
+
 Utilisez l'interface graphique de votre OS pour changer d'adresse IP : 
 
 Panneau de configuration > Connexions réseau > Wi-Fi(WiFi@YNOV) > Propriétés > Protocole Internet version 4 > Utiliser l'adresse IP suivante.
 
 Adresse IP : 10.33.17.27
+
 Longueur de masque : 255.255.252.0
 
 
 Expliquez pourquoi c'est possible de perdre son accès internet en faisant cette opération.
+
 La première personne à posséder une adresse IP est "prioritaire".
 
 
 II. Exploration locale en duo
+
 1. Modification d'adresse IP
+
+
 Modifiez l'IP des deux machines pour qu'elles soient dans le même réseau :
+
 IP : 10.10.10.27
 Longueur de masque : 255.255.255.0
 
@@ -111,7 +118,7 @@ Interface : 10.10.10.27 --- 0x2
   10.10.10.77           d8-bb-c1-f4-60-61     dynamique
 ```
 
-4. Utilisation d'un des deux comme gateway
+1. Utilisation d'un des deux comme gateway
 Tester l'accès internet :
 ```
 PS C:\Users\lebou> ping 1.1.1.1
@@ -296,5 +303,29 @@ DNS ne le considère pas comme un nom de domaine, donc il ne le trouve pas.
 
 
 IV. Wireshark
+
 1. Intro Wireshark
+
+
 Utilisez le pour observer les trames qui circulent entre vos deux carte Ethernet. Mettez en évidence :
+
+Un ping entre vous et votre passerelle :
+```
+PS C:\Users\lebou\Documents\B1\Tp reseau\netcat-1.11> ping 8.8.8.8
+
+Envoi d’une requête 'Ping'  8.8.8.8 avec 32 octets de données :
+Réponse de 8.8.8.8 : octets=32 temps=42 ms TTL=114
+Réponse de 8.8.8.8 : octets=32 temps=87 ms TTL=114
+Réponse de 8.8.8.8 : octets=32 temps=96 ms TTL=114
+Réponse de 8.8.8.8 : octets=32 temps=316 ms TTL=114
+
+Statistiques Ping pour 8.8.8.8:
+    Paquets : envoyés = 4, reçus = 4, perdus = 0 (perte 0%),
+Durée approximative des boucles en millisecondes :
+    Minimum = 42ms, Maximum = 316ms, Moyenne = 135ms
+```
+
+Un netcat entre vous et votre mate, branché en RJ45 :
+```
+image.png
+```
