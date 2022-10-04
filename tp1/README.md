@@ -62,18 +62,21 @@ Passerelle par défaut IPv4 :	10.33.19.254
 ```
 
 2. Modifications des informations
+
 Utilisez l'interface graphique de votre OS pour changer d'adresse IP : 
+
 Panneau de configuration > Connexions réseau > Wi-Fi(WiFi@YNOV) > Propriétés > Protocole Internet version 4 > Utiliser l'adresse IP suivante.
+
 Adresse IP : 10.33.17.27
 Longueur de masque : 255.255.252.0
 
 
-Il est possible que vous perdiez l'accès internet. Que ce soit le cas ou non, expliquez pourquoi c'est possible de perdre son accès internet en faisant cette opération.
+Expliquez pourquoi c'est possible de perdre son accès internet en faisant cette opération.
 La première personne à posséder une adresse IP est "prioritaire".
 
 
 II. Exploration locale en duo
-3. Modification d'adresse IP
+1. Modification d'adresse IP
 Modifiez l'IP des deux machines pour qu'elles soient dans le même réseau :
 IP : 10.10.10.27
 Longueur de masque : 255.255.255.0
