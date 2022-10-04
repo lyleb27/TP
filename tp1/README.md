@@ -182,6 +182,7 @@ Itinéraire déterminé.
 ```
 
 5. Petit chat privé
+
 Sur le PC serveur : 
 ```
 PS C:\Users\lebou\Documents\B1\Tp reseau\netcat-1.11> ./nc64.exe -l -p 8888
@@ -212,7 +213,7 @@ PS C:\WINDOWS\system32> netstat -a -n -b | Select-String 8888
   TCP    192.168.137.1:8888     0.0.0.0:0              LISTENING
 ```
 
-6. Firewall
+1. Firewall
 Activez et configurez votre firewall :
 ```
 PS C:\Users\lebou\Documents\B1\Tp reseau\netcat-1.11> ./nc64.exe -l -p 8888
@@ -233,7 +234,7 @@ Carte réseau sans fil Wi-Fi :
    Serveur DHCP . . . . . . . . . . . . . : 10.33.19.254
 ```
 
-1. DNS
+2. DNS
 
 Trouver l'adresse IP du serveur DNS que connaît votre ordinateur :
 ```
