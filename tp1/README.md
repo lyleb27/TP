@@ -189,3 +189,95 @@ PS C:\WINDOWS\system32> netstat -a -n -b | Select-String 8888
   TCP    192.168.137.1:8888     0.0.0.0:0              LISTENING
 
 
+6. Firewall
+Activez et configurez votre firewall :
+PS C:\Users\lebou\Documents\B1\Tp reseau\netcat-1.11> ./nc64.exe -l -p 8888
+ccddggggccgr
+ok,
+dkdd
+
+
+III. Manipulations d'autres outils/protocoles côté client
+1. DHCP
+Exploration du DHCP, depuis votre PC :
+PS C:\Users\lebou\Documents\B1\Tp reseau\netcat-1.11> ipconfig /all
+Carte réseau sans fil Wi-Fi :
+   Bail expirant. . . . . . . . . . . . . : mercredi 5 octobre 2022 13:57:02
+   Serveur DHCP . . . . . . . . . . . . . : 10.33.19.254
+
+
+2. DNS
+Trouver l'adresse IP du serveur DNS que connaît votre ordinateur :
+PS C:\Users\lebou\Documents\B1\Tp reseau\netcat-1.11> ipconfig /all
+Carte réseau sans fil Wi-Fi :
+Serveurs DNS. . .  . . . . . . . . . . : 8.8.8.8
+
+
+Utiliser, en ligne de commande l'outil nslookup (Windows, MacOS) ou dig (GNU/Linux, MacOS) pour faire des requêtes DNS à la main :
+faites un lookup (lookup = "dis moi à quelle IP se trouve tel nom de domaine"):
+- pour google.com
+- pour ynov.com
+Interpréter les résultats de ces commandes :
+
+PS C:\Users\lebou> nslookup.exe
+Serveur par dÚfaut :   dns.google
+Address:  8.8.8.8
+
+> google.com
+Serveur :   dns.google
+Address:  8.8.8.8
+
+Réponse ne faisant pas autorité :
+Nom :    google.com
+Addresses:  2a00:1450:4007:807::200e
+          142.250.179.78
+
+> ynov.com
+Serveur :   dns.google
+Address:  8.8.8.8
+
+Réponse ne faisant pas autorité :
+Nom :    ynov.com
+Addresses:  2606:4700:20::681a:be9
+          2606:4700:20::681a:ae9
+          2606:4700:20::ac43:4ae2
+          172.67.74.226
+          104.26.10.233
+          104.26.11.233
+
+Les résultats obtenus nous donne les adresses IP des serveurs DNS (pour ynov, il y a plusieurs adresse pour éviter d'être trop sur un même serveur et que le débit soit lent).
+
+
+Déterminer l'adresse IP du serveur à qui vous venez d'effectuer ces requêtes :
+PS C:\Users\lebou> nslookup.exe
+Serveur par dÚfaut :   dns.google
+Address:  8.8.8.8
+
+
+Faites un reverse lookup (= "dis moi si tu connais un nom de domaine pour telle IP") :
+- pour l'adresse 231.34.113.12
+- pour l'adresse 78.34.2.17
+Interpréter les résultats :
+
+PS C:\Users\lebou> nslookup.exe
+Serveur par dÚfaut :   dns.google
+Address:  8.8.8.8
+
+> 231.34.113.12
+Serveur :   dns.google
+Address:  8.8.8.8
+
+*** dns.google ne parvient pas à trouver 231.34.113.12 : Non-existent domain
+> 78.34.2.17
+Serveur :   dns.google
+Address:  8.8.8.8
+
+Nom :    cable-78-34-2-17.nc.de
+Address:  78.34.2.17
+
+DNS ne le considère pas comme un nom de domaine, donc il ne le trouve pas.
+
+
+IV. Wireshark
+1. Intro Wireshark
+Utilisez le pour observer les trames qui circulent entre vos deux carte Ethernet. Mettez en évidence :
