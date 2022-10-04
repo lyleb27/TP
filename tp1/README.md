@@ -249,7 +249,7 @@ faites un lookup (lookup = "dis moi à quelle IP se trouve tel nom de domaine"):
 - pour google.com
 
 - pour ynov.com
-- 
+
 Interpréter les résultats de ces commandes :
 ```
 PS C:\Users\lebou> nslookup.exe
@@ -337,8 +337,12 @@ Statistiques Ping pour 8.8.8.8:
 Durée approximative des boucles en millisecondes :
     Minimum = 42ms, Maximum = 316ms, Moyenne = 135ms
 ```
+![](Capture%20d’écran%20Ping%208.8.8.8.png)
+
 
 Un netcat entre vous et votre mate, branché en RJ45 :
-```
+![](Capture.png)
 
-```
+
+Une requête DNS. Identifiez dans la capture le serveur DNS à qui vous posez la question :
+![](./Capture%20DNS.png)
