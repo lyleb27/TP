@@ -12,22 +12,14 @@ Carte Ethernet Ethernet :
    Masque de sous-réseau. . . . . . . . . : 255.255.252.0
    Passerelle par défaut. . . . . . . . . : 192.168.137.1
 ```
+Adresse de réseau : 192.168.136.0
+
+Adresse de broadcast : 192.168.139.255
 
 
 🌞 Prouvez que la connexion est fonctionnelle entre les deux machines :
 ```
-PS C:\Users\lebou> ping 192.168.137.1
 
-Envoi d’une requête 'Ping'  192.168.137.1 avec 32 octets de données :
-Réponse de 192.168.137.1 : octets=32 temps=2 ms TTL=128
-Réponse de 192.168.137.1 : octets=32 temps=2 ms TTL=128
-Réponse de 192.168.137.1 : octets=32 temps=2 ms TTL=128
-Réponse de 192.168.137.1 : octets=32 temps=3 ms TTL=128
-
-Statistiques Ping pour 192.168.137.1:
-    Paquets : envoyés = 4, reçus = 4, perdus = 0 (perte 0%),
-Durée approximative des boucles en millisecondes :
-    Minimum = 2ms, Maximum = 3ms, Moyenne = 2ms
 ```
 
 
