@@ -118,7 +118,7 @@ Interface : 192.168.124.1 --- 0x17
 
  Mettez en évidence les deux trames ARP échangées lorsque vous essayez de contacter quelqu'un pour la "première" fois :
 
-      - Déterminez, pour les deux trames, les adresses source et destination :
+Déterminez, pour les deux trames, les adresses source et destination :
 - ARP Request :
 ```
 Src: RealtekS_68:00:33 (00:e0:4c:68:00:33), Dst: HP_59:ae:90 (00:68:eb:59:ae:90)
