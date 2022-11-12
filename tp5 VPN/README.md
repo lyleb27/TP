@@ -54,7 +54,68 @@ KJjZHT...
 [rocky@ip-172-31-85-140 ~]$ sudo cat /etc/wireguard/private.key | wg pubkey | sudo tee /etc/wireguard/public.key
 Mthevp3pm9/8NfdCVWdjA/OerH3oTQtNddeM9FAYAmg=
 ```
-Step 2 — Choosing IPv4 :
+
+Step 2 et 3 :
+
+```
+[rocky@ip-172-31-85-140 ~]$ sudo nano /etc/wireguard/wg0.conf
+```
+```
+[Interface]
+PrivateKey = KJjZHTe3rnGztJAmHaM63gttHRMhwOagmfsmW+B4eXk=
+Address = 10.8.0.1/24, fd0d:86fa:c3bc::1/64
+ListenPort = 51820
+SaveConfig = true
+```
+
+Step 4 — Adjusting the WireGuard Server’s Network Configuration :
+```
+[rocky@ip-172-31-85-140 ~]$ sudo nano /etc/sysctl.conf
+```
+```
+# sysctl settings are defined through files in
+# /usr/lib/sysctl.d/, /run/sysctl.d/, and /etc/sysctl.d/.
+#
+# Vendors settings live in /usr/lib/sysctl.d/.
+# To override a whole file, create a new file with the same in
+# /etc/sysctl.d/ and put new settings there. To override
+# only specific settings, add a file with a lexically later
+# name in /etc/sysctl.d/ and put new settings there.
+#
+# For more information, see sysctl.conf(5) and sysctl.d(5).
+net.ipv4.ip_forward=1
+```
+```
+[rocky@ip-172-31-85-140 ~]$ sudo sysctl -p
+net.ipv4.ip_forward = 1
+```
+
+Step 5 — Configuring the WireGuard Server’s Firewall :
+```
+
+```
+
+Step 6 — Starting the WireGuard Server :
+```
+[rocky@ip-172-31-85-140 ~]$ sudo systemctl enable wg-quick@wg0.service
+Created symlink /etc/systemd/system/multi-user.target.wants/wg-quick@wg0.service → /usr/lib/systemd/system/wg-quick@.service.
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
 
 ```
 
