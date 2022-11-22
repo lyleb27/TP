@@ -60,5 +60,20 @@ Nov 22 17:18:36 localhost.localdomain sudo[1039]: pam_unix(sudo:session): sessio
 #Port 16092
 ```
 ```
+[it4@localhost ~]$ sudo firewall-cmd --remove-service=ssh --permanent
+[it4@localhost ~]$ sudo firewall-cmd --reload
+success
+[it4@localhost ~]$ sudo firewall-cmd --list-all | grep ports
+  ports: 16092/tcp
+```
 
+🌞 Redémarrer le service :
+```
+[it4@localhost ~]$ sudo systemctl restart sshd
+```
+
+🌞 Effectuer une connexion SSH sur le nouveau port :
+```
+PS C:\Users\lebou> ssh it4@10.2.3.5 -p 16092
+ssh: connect to host 10.2.3.5 port 16092: Connection refused ????????????????????
 ```
