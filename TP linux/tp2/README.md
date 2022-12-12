@@ -75,5 +75,5 @@ success
 🌞 Effectuer une connexion SSH sur le nouveau port :
 ```
 PS C:\Users\lebou> ssh it4@10.2.3.5 -p 16092
-ssh: connect to host 10.2.3.5 port 16092: Connection refused ????????????????????
+ssh: connect to host 10.2.3.5 port 16092: Connection refused
 ```
