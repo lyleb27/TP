@@ -103,7 +103,7 @@ WantedBy=multi-user.target
 ```
 
 🌞 Déterminer sous quel utilisateur tourne le processus Apache :
-``
+```
 [it4@web ~]$ cat /etc/httpd/conf/httpd.conf | grep User
 User apache
 ```
