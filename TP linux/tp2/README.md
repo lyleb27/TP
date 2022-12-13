@@ -75,5 +75,92 @@ success
 🌞 Effectuer une connexion SSH sur le nouveau port :
 ```
 PS C:\Users\lebou> ssh it4@10.2.3.5 -p 16092
-ssh: connect to host 10.2.3.5 port 16092: Connection refused
+it4@10.2.3.5' s password:
+Last login: Tue Dec 13 14:40:35 2022 from 10.2.3.1
+```
+
+II. Service HTTP :
+
+1. Mise en place
+
+🌞 Installer le serveur NGINX :
+```
+[it4@localhost ~]$ sudo dnf install nginx
+Complete!
+```
+
+🌞 Démarrer le service NGINX :
+```
+[it4@localhost ~]$ sudo systemctl start nginx
+```
+
+🌞 Déterminer sur quel port tourne NGINX :
+```
+[it4@localhost ~]$ sudo ss -alnpt | grep nginx
+[sudo] password for it4:
+LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("nginx",pid=11112,fd=6),("nginx",pid=11111,fd=6))
+LISTEN 0      511             [::]:80           [::]:*    users:(("nginx",pid=11112,fd=7),("nginx",pid=11111,fd=7))
+
+[it4@localhost ~]$ sudo firewall-cmd --permanent --add-port=80/tcp
+success
+```
+
+🌞 Déterminer les processus liés à l'exécution de NGINX :
+```
+[it4@localhost ~]$ ps -ef | grep nginx
+root         952       1  0 17:41 ?        00:00:00 nginx: master process /usr/sbin/nginx
+nginx        953     818  0 17:41 ?        00:00:00 nginx: worker process
+it4         968     841  0 21:42 pts/0    00:00:00 grep --color=auto nginx
+```
+
+🌞 Euh wait :
+```
+lebou@LAPTOP-R8S29PG0 MINGW64 ~
+$ curl 10.2.3.5:80 | head -n7  
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  7620  100  7620    0     0   875k      0 --:--:-- --:--:-- --:--:-- 2480k
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>HTTP Server Test Page powered by: Rocky Linux</title>
+    <style type="text/css">
+```
+
+2. Analyser la conf de NGINX
+
+🌞 Déterminer le path du fichier de configuration de NGINX :
+```
+[it4@localhost ~]$ sudo find /etc -iname nginx.conf
+/etc/nginx/nginx.conf
+```
+
+🌞 Trouver dans le fichier de conf :
+```
+[it4@localhost ~]$ sudo cat /etc/nginx/nginx.conf | grep server -A 12
+    server {
+        listen       80;
+        listen       [::]:80;
+        server_name  _;
+        root         /usr/share/nginx/html;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        error_page 404 /404.html;
+        location = /404.html {
+        }
+```
+```
+[it4@localhost nginx]$cat nginx.conf | grep -i '^ *include'
+    include /etc/nginx/conf.d/*.conf;
+```
+
+3. Déployer un nouveau site web
+
+🌞 Créer un site web :
+```
+
 ```
