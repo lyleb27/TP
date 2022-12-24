@@ -52,11 +52,23 @@ III. MAKE IT A SERVICE
 🌞 Vous fournirez dans le compte-rendu, en plus des fichiers :
 - un systemctl status yt quand le service est en cours de fonctionnement
 ```
-
+[it4@tp3 yt]$ sudo systemctl status yt
+● yt.service - "Downloads youtube videos from the url in /srv/service/urls.txt"
+     Loaded: loaded (/etc/systemd/system/yt.service; disabled; vendor preset: disabled)
+     Active: active (running) since Mon 2022-12-19 20:52:41 CET; 2min 41s ago
 ```
 - un extrait de journalctl -xe -u yt
-- ```
-
 ```
-📁 Le script /srv/yt/yt-v2.sh
-📁 Fichier /etc/systemd/system/yt.service
+[rocky@linuxTP3 yt]$ journalctl -xe -u yt
+[...]
+Dec 19 21:02:41 tp3 systemd[1]: Started "Downloads youtube videos from the url in /srv/service/url>
+░░ Subject: A start job for unit yt.service has finished successfully
+░░ Defined-By: systemd
+░░ Support: https://access.redhat.com/support
+░░ 
+░░ A start job for unit yt.service has finished successfully.
+░░ 
+░░ The job identifier is 7652.
+```
+[📁 Le script /srv/yt/yt-v2.sh](yt-v2.sh)
+[📁 Fichier /etc/systemd/system/yt.service](yt.service)
