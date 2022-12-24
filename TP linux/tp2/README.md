@@ -108,9 +108,9 @@ success
 🌞 Déterminer les processus liés à l'exécution de NGINX :
 ```
 [it4@localhost ~]$ ps -ef | grep nginx
-root         952       1  0 17:41 ?        00:00:00 nginx: master process /usr/sbin/nginx
-nginx        953     818  0 17:41 ?        00:00:00 nginx: worker process
-it4         968     841  0 21:42 pts/0    00:00:00 grep --color=auto nginx
+root         1375       1  0 21:41 ?        00:00:00 nginx: master process /usr/sbin/nginx
+nginx        1391     1375  0 21:41 ?        00:00:00 nginx: worker process
+it4        1595     1421  0 21:42 pts/0    00:00:00 grep --color=auto nginx
 ```
 
 🌞 Euh wait :
@@ -163,11 +163,17 @@ $ curl 10.2.3.5:80 | head -n7
 🌞 Créer un site web :
 ```
 [it4@localhost var]$ sudo mkdir www
+
 [it4@localhost var]$ cd www/
+
 [it4@localhost www]$ sudo mkdir tp2_linux
+
 [it4@localhost www]$ cd tp2_linux/
+
 [it4@localhost tp2_linux]$ sudo touch index.html
+
 [it4@localhost tp2_linux]$ sudo nano index.html
+
 [it4@localhost tp2_linux]$ sudo cat index.html
 <h1>MEOW mon premier serveur web</h1>
 ```
