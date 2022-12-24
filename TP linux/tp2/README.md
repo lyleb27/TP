@@ -162,5 +162,133 @@ $ curl 10.2.3.5:80 | head -n7
 
 🌞 Créer un site web :
 ```
+[it4@localhost var]$ sudo mkdir www
+[it4@localhost var]$ cd www/
+[it4@localhost www]$ sudo mkdir tp2_linux
+[it4@localhost www]$ cd tp2_linux/
+[it4@localhost tp2_linux]$ sudo touch index.html
+[it4@localhost tp2_linux]$ sudo nano index.html
+[it4@localhost tp2_linux]$ sudo cat index.html
+<h1>MEOW mon premier serveur web</h1>
+```
 
+🌞 Adapter la conf NGINX :
+```
+[it4@localhost ~]$ sudo nano nginx.conf
+
+[it4@localhost ~]$ sudo systemctl restart nginx
+
+[it4@localhost conf.d]$ sudo touch tp2_linux.conf
+```
+```
+[it4@localhost ~]$ sudo cat /etc/nginx/conf.d/tp2_linux.conf
+server {
+  listen 4792;
+
+  root /var/www/tp2_linux;
+}
+```
+```
+[it4@localhost conf.d]$ sudo firewall-cmd --add-port=4792/tcp --permanent
+success
+[it4@localhost conf.d]$ sudo firewall-cmd --remove-port=80/tcp --permanent
+success
+[it4@localhost conf.d]$ sudo firewall-cmd --reload
+success
+
+[it4@localhost ~]$ sudo systemctl restart nginx
+```
+
+🌞 Visitez votre super site web :
+```
+[it4@localhost ~]$ curl http://10.2.3.5:4792
+<h1>MEOW mon premier serveur web</h1>
+```
+
+III. Your own services :
+
+2. Analyse des services existants
+
+🌞 Afficher le fichier de service SSH :
+```
+[it4@localhost ~]$ cat /usr/lib/systemd/system/sshd.service | grep ExecStart=
+ExecStart=/usr/sbin/sshd -D $OPTIONS
+```
+
+🌞 Afficher le fichier de service NGINX :
+```
+[it4@localhost ~]$ cat /usr/lib/systemd/system/sshd.service | grep ExecStart=
+ExecStart=/usr/sbin/sshd -D $OPTIONS
+```
+
+3. Création de service
+
+🌞 Créez le fichier /etc/systemd/system/tp2_nc.service :
+```
+[it4@localhost system]$ echo $RANDOM
+2751
+[it4@localhost system]$ sudo touch tp2_nc.service
+[it4@localhost system]$ sudo nano tp2_nc.service
+[it4@localhost system]$ cat tp2_nc.service
+[Unit]
+Description=Super netcat tout fou
+
+[Service]
+ExecStart=/usr/bin/nc -l 2751
+```
+
+🌞 Indiquer au système qu'on a modifié les fichiers de service :
+```
+[it4@localhost system]$ sudo systemctl daemon-reload
+```
+
+🌞 Démarrer notre service de ouf :
+```
+[it4@localhost system]$ sudo systemctl start tp2_nc.service
+```
+
+🌞 Vérifier que ça fonctionne :
+```
+[it4@localhost system]$ sudo systemctl status tp2_nc.service
+● tp2_nc.service - Super netcat tout fou
+     Loaded: loaded (/etc/systemd/system/tp2_nc.service; static)
+     Active: active (running) since Mon 2022-12-12 18:53:01 CET; 1min 2s ago
+   Main PID: 937 (nc)
+      Tasks: 1 (limit: 5904)
+     Memory: 784.0K
+        CPU: 3ms
+     CGroup: /system.slice/tp2_nc.service
+             └─937 /usr/bin/nc -l 2751
+
+Dec 12 18:53:01 machine.lab.ingesup systemd[1]: Started Super netcat tout fou.
+```
+```
+[it4@localhost system]$ sudo ss -lutmp | grep nc
+tcp   LISTEN 0      10           0.0.0.0:2751       0.0.0.0:*    users:(("nc",pid=937,fd=4))
+tcp   LISTEN 0      10              [::]:2751          [::]:*    users:(("nc",pid=937,fd=3))
+```
+
+🌞 Les logs de votre service :
+```
+[it4@localhost system]$ sudo journalctl -xe -u tp2_nc | grep Started
+Dec 12 19:13:01 localhost.localdomain systemd[1]: Started Super netcat tout fou.
+
+[it4@localhost system]$ sudo journalctl -xe -u tp2_nc | grep Bonjour
+Dec 12 19:18:13 localhost.localdomain nc[1183]: Bonjour
+
+[it4@localhost system]$ sudo journalctl -xe -u tp2_nc | grep Stopped
+Dec 12 19:19:29 localhost.localdomain systemd[1]: Stopped Super netcat tout fou.
+```
+
+🌞 Affiner la définition du service :
+```
+[it4@localhost ~]$ sudo cat /etc/systemd/system/tp2_nc.service
+[Unit]
+Description=Super netcat tout fou
+
+[Service]
+ExecStart=/usr/bin/nc -l 2751
+Restart=always
+
+[it4@localhost ~]$ sudo systemctl daemon-reload
 ```
