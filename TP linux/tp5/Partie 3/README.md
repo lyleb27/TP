@@ -37,7 +37,7 @@ Aborted
 Complete!
 ```
 ```
-sudo mysql -u nextcloud -h 10.105.1.12 -pewpewpew
+[it4@web ~]$ sudo mysql -u nextcloud -h 10.105.1.11 -pewpewpew
 mysql: [Warning] Using a password on the command line interface can be insecure.
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 7
@@ -116,6 +116,7 @@ Complete!
 
 [it4@web ~]$ sudo unzip nextcloud -d /var/www/tp5_nextcloud/
 ```
+
 🌞 Adapter la configuration d'Apache :
 ```
 [it4@web ~]$ sudo cat /etc/httpd/conf.d/nextcloud.conf
